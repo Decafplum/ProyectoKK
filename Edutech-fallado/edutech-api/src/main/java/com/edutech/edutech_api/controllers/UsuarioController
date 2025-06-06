@@ -1,0 +1,26 @@
+package com.edutech.edutech_api.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.Edutech.springboot.rest.fullrest.entities.Usuario;
+import com.Edutech.springboot.rest.fullrest.repositories.UsuarioRepositories;
+
+@Controller
+public class UsuarioController {
+
+    @Autowired
+    private UsuarioRepositories usuarioRepositories;
+
+    @GetMapping("/usuarios")
+    public String verUsuarios(Model model){
+        List<Usuario> usuarios = (List<Usuario>) usuarioRepositories.findAll();
+        model.addAttribute("usuario", usuarios);
+        return "usuario";
+
+    }
+}
